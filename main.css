@@ -1,0 +1,113 @@
+:root{
+
+}
+
+html {
+    padding: 0;
+    margin: 0;
+}
+body{
+    padding: 50px;
+    background-color: #1d2124;
+    color: #3177b5;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+h1{
+    text-align: center;
+}
+
+.img{
+    display: inline-block;
+    height: auto;
+    max-width: 100%;
+    padding: 4px;
+    line-height: 1.428571429;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+div.drag img{
+  margin: 5px;
+}
+
+footer{
+    background-color: #000000;
+    color: #bababa;
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    align-items: center;
+
+}
+footer a {
+    text-decoration: none;
+    color: #bababa;
+    text-align: center;
+}
+
+
+
+
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+   = = = = = = = = = = = = = = = =  H e l p e r s  = = = = = = = = = = = = = = = = = =
+   = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+*/
+.cantered-horizontal {
+    display: flex;
+    justify-content: center;
+}
+
+
+.flex-vertical{
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-inline{
+    display: inline-flex;
+}
+
+.width-100{
+    width: 100%;
+}
+
+.width-250p{
+    width: 250px;
+}
+
+.blockTitle{
+    font-size: 24px;
+    margin: 20px 0 5px 0;
+    font-weight: bold;
+}
+
+.pt-15{
+    padding-top: 15px;
+}
+
+.mt-15{
+    margin-top: 15px;
+}
+.mb-10{
+    margin-bottom: 10px;
+}
+
+.mh-30{
+    margin: 0 30px 0 30px;
+}
+
+.vh-100{
+    height: 100vh;
+}
