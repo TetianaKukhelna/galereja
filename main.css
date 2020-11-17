@@ -20,7 +20,55 @@ body{
 h1{
     text-align: center;
 }
+/**************************************************************************************/
+/**************************************************************************************/
+.photo-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px) ;
+    column-gap: 10px;
+    row-gap: 15px;
+    list-style-type: none;
+}
 
+.photo-container-item{
+    /*width: 300px;*/
+    height: 300px;
+    background-color: #0f6674;
+
+}
+
+.photo-container-item img{
+    width: 100%;
+    height: 100%;
+}
+
+/******************************************/
+/******************************************/
+
+@media (max-width: 992px) {
+    .photo-container{
+        grid-template-columns: repeat(auto-fill, 400px) ;
+    }
+    .photo-container-item{
+        height: 400px;
+    }
+}
+
+@media (max-width: 640px) {
+    .photo-container{
+        grid-template-columns: 1fr ;
+        padding: 0;
+    }
+    .photo-container-item{
+        width: 100%;
+        min-width: 300px;
+        height: 100%;
+        min-height: 500px;
+    }
+}
+
+
+/****************************************/
 .img{
     display: inline-block;
     height: auto;
@@ -33,9 +81,6 @@ h1{
     vertical-align: middle;
 }
 
-div.drag img{
-  margin: 5px;
-}
 
 footer{
     background-color: #000000;
