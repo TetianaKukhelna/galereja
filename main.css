@@ -25,16 +25,18 @@ h1{
 .photo-container{
     display: grid;
     grid-template-columns: repeat(auto-fill, 300px) ;
-    column-gap: 10px;
+    /*grid-template-rows: repeat(auto-fill, 300px) ;*/
+    grid-auto-rows: 300px;
+    column-gap: 15px;
     row-gap: 15px;
     list-style-type: none;
+    /*height: fit-content;*/
+    padding: 0;
+    justify-content: center;
 }
 
 .photo-container-item{
-    /*width: 300px;*/
-    height: 300px;
     background-color: #0f6674;
-
 }
 
 .photo-container-item img{
@@ -48,26 +50,29 @@ h1{
 @media (max-width: 992px) {
     .photo-container{
         grid-template-columns: repeat(auto-fill, 400px) ;
-    }
-    .photo-container-item{
-        height: 400px;
+        grid-auto-rows: 400px;
     }
 }
 
 @media (max-width: 640px) {
     .photo-container{
-        grid-template-columns: 1fr ;
-        padding: 0;
+        grid-template-columns: repeat(auto-fill, 450px) ;
+        grid-auto-rows: 450px;
     }
-    .photo-container-item{
-        width: 100%;
-        min-width: 300px;
-        height: 100%;
-        min-height: 500px;
-    }
+    /*.photo-container-item{*/
+    /*    width: 100%;*/
+    /*    min-width: 300px;*/
+    /*    height: 100%;*/
+    /*    min-height: 500px;*/
+    /*}*/
 }
 
-
+@media (max-width: 480px) {
+    .photo-container {
+        grid-template-columns: repeat(auto-fill, 400px);
+        grid-auto-rows: 400px;
+    }
+}
 /****************************************/
 .img{
     display: inline-block;
