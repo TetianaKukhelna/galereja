@@ -95,7 +95,9 @@ footer{
     font-size: 14px;
     border-radius: 50%;
     width: 100px;
+    min-width: 100px;
     height: 100px;
+    min-height: 100px;
     margin-right: auto;
     margin-left: auto;
     align-items: center;
