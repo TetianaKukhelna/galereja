@@ -18,9 +18,8 @@
     <h1>Album</h1>
 </header>
 
-<form class="pad">
-    <input id="place_search" type="search" name="q" placeholder="For example: nature, human"
-           class="cantered-horizontal filter flex-inline">
+<form class="pad align ">
+    <input id="place_search" type="search" name="q" placeholder="For example: nature, human">
     <button type="submit"></button>
 </form>
 
@@ -32,7 +31,8 @@
 <!--  </div>-->
 <!--</div>-->
 
-<section id="data">
+<section>
+<!--    <div id="data"></div>-->
 <!--        <ul class="photo-container" draggable="true">-->
 <!--            <li class="photo-container-item"-->
 <!--                 style="background: url(photo/photo1.jpg) no-repeat center center"-->
@@ -85,20 +85,20 @@
 
 <script>
 
-    function load() {
-        var mydata = JSON.parse('photos.json');
+
+    $(document).ready(function () {
+
+        var mydata = JSON.parse('/photos.json');
         alert(mydata.length);
 
         var div = document.getElementById('data');
         var i;
         for (i in div) {
-            div.innerHTML = div.innerHTML + mydata[i].src + mydata[i].title + mydata[i].description;
+            console.log("i = ",i);
+            console.log("i = ",div);
+            div.href = div.href + mydata[i].src;
+            div.innerHTML = div.innerHTML + mydata[i].title + mydata[i].description;
         }
-    }
-
-
-    $(document).ready(function () {
-
 
         var adjustment
 

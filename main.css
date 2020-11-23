@@ -156,14 +156,18 @@ ul.photo-container .placeholder{
     vertical-align: middle;
     display: inline-block;
     /*background-color: #CCC;*/
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     position: relative;
     border: 2px dashed #000;
     line-height: 1.428571429;
-    background-color: #fff;
+    /*background-color: #fff;*/
     border-radius: 4px;
     padding: 4px;
+}
+
+input::placeholder{
+    color: white;
 }
 
 
@@ -184,6 +188,11 @@ ul.photo-container .placeholder{
 
 .flex-inline{
     display: inline-flex;
+}
+
+.align{
+    align-self: center;
+    margin: 10px!important;
 }
 
 .width-100{
