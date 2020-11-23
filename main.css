@@ -236,7 +236,7 @@ ul.photo-container .placeholder{
   width: 350px;
   height: 42px;
   padding-left: 15px;
-  border: 3px solid #F9F0DA;
+  /*border: 3px solid #F9F0DA;*/
 }
 .pad button {
   border: none;
