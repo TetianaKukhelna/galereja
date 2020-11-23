@@ -2,19 +2,25 @@
     "photos":
     [
       {
-        "src": "photo1.png",
+        "src": "photo/photo1.jpg",
         "title": "Názov fotky 1",
         "description": "Dlhší popis obrázku 1"
       },
       {
-        "src": "photo2.png",
+        "src": "photo/photo2.jpg",
         "title": "Názov fotky 2",
         "description": "Dlhší popis obrázku 2"
       },
       {
-        "src": "photo3.png",
+        "src": "photo/photo3.png",
         "title": "Názov fotky 3",
         "description": "Dlhší popis obrázku 3"
+      },
+      {
+        "src": "photo/photo4.jpg",
+        "title": "Názov fotky 2",
+        "description": "Dlhší popis obrázku 2"
       }
+
     ]
 }

@@ -5,6 +5,7 @@
     <script src="static/plotly-latest.min.js"></script>
     <script src="static/jquery-sortable.js"></script>
 
+
     <link rel="stylesheet" href="bootstrap.css">
     <link rel="stylesheet" href="main.css">
     <meta charset="UTF-8">
@@ -23,58 +24,50 @@
     <button type="submit"></button>
 </form>
 
-<!--<div class="container">-->
-<!--  <div class="row">-->
-<!--    <div class="drag">-->
-<!--      <img src="photos.json" class="img">-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
 <section>
-<!--    <div id="data"></div>-->
-<!--        <ul class="photo-container" draggable="true">-->
-<!--            <li class="photo-container-item"-->
-<!--                 style="background: url(photo/photo1.jpg) no-repeat center center"-->
-<!--                 data-url="photo/photo1.jpg">-->
-<!--            </li>-->
-<!--            <li class="photo-container-item"-->
-<!--                 style="background: url(photo/photo2.jpg) no-repeat center center"-->
-<!--                 data-url="photo/photo2.jpg">-->
-<!--            </li>-->
-<!--            <li class="photo-container-item"-->
-<!--                 style="background: url(photo/photo3.png) no-repeat center center"-->
-<!--                 data-url="photo/photo3.jpg">-->
-<!--            </li>-->
-<!--            <li class="photo-container-item"-->
-<!--                 style="background: url(photo/photo4.jpg) no-repeat center center"-->
-<!--                 data-url="photo/photo4.jpg">-->
-<!--            </li>-->
-<!--            <li class="photo-container-item"-->
-<!--                 style="background: url(photo/photo5.jpg) no-repeat center center"-->
-<!--                 data-url="photo/photo5.jpg">-->
-<!--            </li>-->
-<!--            <li class="photo-container-item"-->
-<!--                 style="background: url(photo/photo6.jpg) no-repeat center center"-->
-<!--                 data-url="photo/photo6.jpg">-->
-<!--            </li>-->
-<!--            <li class="photo-container-item"-->
-<!--                 style="background: url(photo/photo7.jpg) no-repeat center center"-->
-<!--                 data-url="photo/photo7.jpg">-->
-<!--            </li>-->
-<!--            <li class="photo-container-item"-->
-<!--                 style="background: url(photo/photo8.jpg) no-repeat center center"-->
-<!--                 data-url="photo/photo8.jpg">-->
-<!--            </li>-->
-<!--            <li class="photo-container-item"-->
-<!--                 style="background: url(photo/photo9.jpg) no-repeat center center"-->
-<!--                 data-url="photo/photo9.jpg">-->
-<!--            </li>-->
-<!--            <li class="photo-container-item"-->
-<!--                 style="background: url(photo/photo10.jpg) no-repeat center center"-->
-<!--                 data-url="photo/photo10.jpg">-->
-<!--            </li>-->
-<!--        </ul>-->
+        <div id="data"></div>
+    <!--        <ul class="photo-container" draggable="true">-->
+    <!--            <li class="photo-container-item"-->
+    <!--                 style="background: url(photo/photo1.jpg) no-repeat center center"-->
+    <!--                 data-url="photo/photo1.jpg">-->
+    <!--            </li>-->
+    <!--            <li class="photo-container-item"-->
+    <!--                 style="background: url(photo/photo2.jpg) no-repeat center center"-->
+    <!--                 data-url="photo/photo2.jpg">-->
+    <!--            </li>-->
+    <!--            <li class="photo-container-item"-->
+    <!--                 style="background: url(photo/photo3.png) no-repeat center center"-->
+    <!--                 data-url="photo/photo3.jpg">-->
+    <!--            </li>-->
+    <!--            <li class="photo-container-item"-->
+    <!--                 style="background: url(photo/photo4.jpg) no-repeat center center"-->
+    <!--                 data-url="photo/photo4.jpg">-->
+    <!--            </li>-->
+    <!--            <li class="photo-container-item"-->
+    <!--                 style="background: url(photo/photo5.jpg) no-repeat center center"-->
+    <!--                 data-url="photo/photo5.jpg">-->
+    <!--            </li>-->
+    <!--            <li class="photo-container-item"-->
+    <!--                 style="background: url(photo/photo6.jpg) no-repeat center center"-->
+    <!--                 data-url="photo/photo6.jpg">-->
+    <!--            </li>-->
+    <!--            <li class="photo-container-item"-->
+    <!--                 style="background: url(photo/photo7.jpg) no-repeat center center"-->
+    <!--                 data-url="photo/photo7.jpg">-->
+    <!--            </li>-->
+    <!--            <li class="photo-container-item"-->
+    <!--                 style="background: url(photo/photo8.jpg) no-repeat center center"-->
+    <!--                 data-url="photo/photo8.jpg">-->
+    <!--            </li>-->
+    <!--            <li class="photo-container-item"-->
+    <!--                 style="background: url(photo/photo9.jpg) no-repeat center center"-->
+    <!--                 data-url="photo/photo9.jpg">-->
+    <!--            </li>-->
+    <!--            <li class="photo-container-item"-->
+    <!--                 style="background: url(photo/photo10.jpg) no-repeat center center"-->
+    <!--                 data-url="photo/photo10.jpg">-->
+    <!--            </li>-->
+    <!--        </ul>-->
 
 </section>
 
@@ -87,20 +80,26 @@
 
 
     $(document).ready(function () {
+        const url = "photos.json";
+        fetch(url)
+        .then(response => response.json())
+        .then(function (photoJson) {
 
-        var mydata = JSON.parse('/photos.json');
-        alert(mydata.length);
+            var $divContainer = $("#data");
 
-        var div = document.getElementById('data');
-        var i;
-        for (i in div) {
-            console.log("i = ",i);
-            console.log("i = ",div);
-            div.href = div.href + mydata[i].src;
-            div.innerHTML = div.innerHTML + mydata[i].title + mydata[i].description;
-        }
+            let liArr = photoJson.photos.map(function(photoItem, index, pJson) {
+                return `<li class="photo-container-item"
+                            style="background: url(${photoItem.src}) no-repeat center center"
+                            data-url="${photoItem.src}"
+                            data-title="${photoItem.title}"
+                            data-description="${photoItem.description}">`
+            });
+            let joinLiString = liArr.join('')
+            const ul = "<ul class=\"photo-container\" draggable=\"true\">" + joinLiString + "</ul>";
+            $divContainer.append(ul);
 
-        var adjustment
+
+            var adjustment
 
         var group = $("ul.photo-container").sortable({
             group: 'photo-container',
@@ -140,6 +139,10 @@
                 return isContainer ? children.join() : parent.attr('rel')
             }
         })
+        });
+
+
+
     });
 
     function setCookie(cname, cvalue, exdays) {
