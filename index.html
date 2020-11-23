@@ -33,48 +33,48 @@
 <!--</div>-->
 
 <section id="data">
-        <ul class="photo-container" draggable="true">
-            <li class="photo-container-item"
-                 style="background: url(photo/photo1.jpg) no-repeat center center"
-                 data-url="photo/photo1.jpg">
-            </li>
-            <li class="photo-container-item"
-                 style="background: url(photo/photo2.jpg) no-repeat center center"
-                 data-url="photo/photo2.jpg">
-            </li>
-            <li class="photo-container-item"
-                 style="background: url(photo/photo3.png) no-repeat center center"
-                 data-url="photo/photo3.jpg">
-            </li>
-            <li class="photo-container-item"
-                 style="background: url(photo/photo4.jpg) no-repeat center center"
-                 data-url="photo/photo4.jpg">
-            </li>
-            <li class="photo-container-item"
-                 style="background: url(photo/photo5.jpg) no-repeat center center"
-                 data-url="photo/photo5.jpg">
-            </li>
-            <li class="photo-container-item"
-                 style="background: url(photo/photo6.jpg) no-repeat center center"
-                 data-url="photo/photo6.jpg">
-            </li>
-            <li class="photo-container-item"
-                 style="background: url(photo/photo7.jpg) no-repeat center center"
-                 data-url="photo/photo7.jpg">
-            </li>
-            <li class="photo-container-item"
-                 style="background: url(photo/photo8.jpg) no-repeat center center"
-                 data-url="photo/photo8.jpg">
-            </li>
-            <li class="photo-container-item"
-                 style="background: url(photo/photo9.jpg) no-repeat center center"
-                 data-url="photo/photo9.jpg">
-            </li>
-            <li class="photo-container-item"
-                 style="background: url(photo/photo10.jpg) no-repeat center center"
-                 data-url="photo/photo10.jpg">
-            </li>
-        </ul>
+<!--        <ul class="photo-container" draggable="true">-->
+<!--            <li class="photo-container-item"-->
+<!--                 style="background: url(photo/photo1.jpg) no-repeat center center"-->
+<!--                 data-url="photo/photo1.jpg">-->
+<!--            </li>-->
+<!--            <li class="photo-container-item"-->
+<!--                 style="background: url(photo/photo2.jpg) no-repeat center center"-->
+<!--                 data-url="photo/photo2.jpg">-->
+<!--            </li>-->
+<!--            <li class="photo-container-item"-->
+<!--                 style="background: url(photo/photo3.png) no-repeat center center"-->
+<!--                 data-url="photo/photo3.jpg">-->
+<!--            </li>-->
+<!--            <li class="photo-container-item"-->
+<!--                 style="background: url(photo/photo4.jpg) no-repeat center center"-->
+<!--                 data-url="photo/photo4.jpg">-->
+<!--            </li>-->
+<!--            <li class="photo-container-item"-->
+<!--                 style="background: url(photo/photo5.jpg) no-repeat center center"-->
+<!--                 data-url="photo/photo5.jpg">-->
+<!--            </li>-->
+<!--            <li class="photo-container-item"-->
+<!--                 style="background: url(photo/photo6.jpg) no-repeat center center"-->
+<!--                 data-url="photo/photo6.jpg">-->
+<!--            </li>-->
+<!--            <li class="photo-container-item"-->
+<!--                 style="background: url(photo/photo7.jpg) no-repeat center center"-->
+<!--                 data-url="photo/photo7.jpg">-->
+<!--            </li>-->
+<!--            <li class="photo-container-item"-->
+<!--                 style="background: url(photo/photo8.jpg) no-repeat center center"-->
+<!--                 data-url="photo/photo8.jpg">-->
+<!--            </li>-->
+<!--            <li class="photo-container-item"-->
+<!--                 style="background: url(photo/photo9.jpg) no-repeat center center"-->
+<!--                 data-url="photo/photo9.jpg">-->
+<!--            </li>-->
+<!--            <li class="photo-container-item"-->
+<!--                 style="background: url(photo/photo10.jpg) no-repeat center center"-->
+<!--                 data-url="photo/photo10.jpg">-->
+<!--            </li>-->
+<!--        </ul>-->
 
 </section>
 
@@ -86,12 +86,12 @@
 <script>
 
     function load() {
-        var mydata = JSON.parse(photos);
+        var mydata = JSON.parse('photos.json');
         alert(mydata.length);
 
         var div = document.getElementById('data');
-
-        for (var i = 0; i < mydata.length; i++) {
+        var i;
+        for (i in div) {
             div.innerHTML = div.innerHTML + mydata[i].src + mydata[i].title + mydata[i].description;
         }
     }
