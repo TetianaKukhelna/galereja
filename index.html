@@ -32,49 +32,49 @@
 <!--  </div>-->
 <!--</div>-->
 
-<section>
-    <!--    <ul class="photo-container" draggable="true">-->
-    <!--        <li class="photo-container-item"-->
-    <!--             style="background: url(photo/photo1.jpg) no-repeat center center"-->
-    <!--             data-url="photo/photo1.jpg">-->
-    <!--        </li>-->
-    <!--        <li class="photo-container-item"-->
-    <!--             style="background: url(photo/photo2.jpg) no-repeat center center"-->
-    <!--             data-url="photo/photo2.jpg">-->
-    <!--        </li>-->
-    <!--        <li class="photo-container-item"-->
-    <!--             style="background: url(photo/photo3.png) no-repeat center center"-->
-    <!--             data-url="photo/photo3.jpg">-->
-    <!--        </li>-->
-    <!--        <li class="photo-container-item"-->
-    <!--             style="background: url(photo/photo4.jpg) no-repeat center center"-->
-    <!--             data-url="photo/photo4.jpg">-->
-    <!--        </li>-->
-    <!--        <li class="photo-container-item"-->
-    <!--             style="background: url(photo/photo5.jpg) no-repeat center center"-->
-    <!--             data-url="photo/photo5.jpg">-->
-    <!--        </li>-->
-    <!--        <li class="photo-container-item"-->
-    <!--             style="background: url(photo/photo6.jpg) no-repeat center center"-->
-    <!--             data-url="photo/photo6.jpg">-->
-    <!--        </li>-->
-    <!--        <li class="photo-container-item"-->
-    <!--             style="background: url(photo/photo7.jpg) no-repeat center center"-->
-    <!--             data-url="photo/photo7.jpg">-->
-    <!--        </li>-->
-    <!--        <li class="photo-container-item"-->
-    <!--             style="background: url(photo/photo8.jpg) no-repeat center center"-->
-    <!--             data-url="photo/photo8.jpg">-->
-    <!--        </li>-->
-    <!--        <li class="photo-container-item"-->
-    <!--             style="background: url(photo/photo9.jpg) no-repeat center center"-->
-    <!--             data-url="photo/photo9.jpg">-->
-    <!--        </li>-->
-    <!--        <li class="photo-container-item"-->
-    <!--             style="background: url(photo/photo10.jpg) no-repeat center center"-->
-    <!--             data-url="photo/photo10.jpg">-->
-    <!--        </li>-->
-    <!--    </ul>-->
+<section id="data">
+        <ul class="photo-container" draggable="true">
+            <li class="photo-container-item"
+                 style="background: url(photo/photo1.jpg) no-repeat center center"
+                 data-url="photo/photo1.jpg">
+            </li>
+            <li class="photo-container-item"
+                 style="background: url(photo/photo2.jpg) no-repeat center center"
+                 data-url="photo/photo2.jpg">
+            </li>
+            <li class="photo-container-item"
+                 style="background: url(photo/photo3.png) no-repeat center center"
+                 data-url="photo/photo3.jpg">
+            </li>
+            <li class="photo-container-item"
+                 style="background: url(photo/photo4.jpg) no-repeat center center"
+                 data-url="photo/photo4.jpg">
+            </li>
+            <li class="photo-container-item"
+                 style="background: url(photo/photo5.jpg) no-repeat center center"
+                 data-url="photo/photo5.jpg">
+            </li>
+            <li class="photo-container-item"
+                 style="background: url(photo/photo6.jpg) no-repeat center center"
+                 data-url="photo/photo6.jpg">
+            </li>
+            <li class="photo-container-item"
+                 style="background: url(photo/photo7.jpg) no-repeat center center"
+                 data-url="photo/photo7.jpg">
+            </li>
+            <li class="photo-container-item"
+                 style="background: url(photo/photo8.jpg) no-repeat center center"
+                 data-url="photo/photo8.jpg">
+            </li>
+            <li class="photo-container-item"
+                 style="background: url(photo/photo9.jpg) no-repeat center center"
+                 data-url="photo/photo9.jpg">
+            </li>
+            <li class="photo-container-item"
+                 style="background: url(photo/photo10.jpg) no-repeat center center"
+                 data-url="photo/photo10.jpg">
+            </li>
+        </ul>
 
 </section>
 
@@ -85,73 +85,63 @@
 
 <script>
 
-    $(function () {
-        var imagesJson;
-        var imagesCount;
-        $.getJSON("photos.json", function (result) {
-            /*If cookies are not set*/
-            if (getCookie("imagesOrder") == null) {
-                setCookie("imagesOrder", result);
-                imagesJson = result;
-                imagesCount = Object.keys(imagesJson.photos).length;
-            }
-            /*If cookies are set*/
-            else {
-                imagesJson = getCookie("imagesOrder");
-                imagesCount = Object.keys(imagesJson.photos).length;
-            }
+    function load() {
+        var mydata = JSON.parse(photos);
+        alert(mydata.length);
 
-            generateGalery(imagesJson, imagesCount);
-            generateModal(imagesJson, imagesCount);
+        var div = document.getElementById('data');
 
-        });
+        for (var i = 0; i < mydata.length; i++) {
+            div.innerHTML = div.innerHTML + mydata[i].src + mydata[i].title + mydata[i].description;
+        }
+    }
 
 
-        $(document).ready(function () {
+    $(document).ready(function () {
 
 
-            var adjustment
+        var adjustment
 
-            var group = $("ul.photo-container").sortable({
-                group: 'photo-container',
-                itemSelector: 'li.photo-container-item',
-                containerSelector: 'ul',
-                vertical: false,
-                placeholder: '<div class="placeholder" />',
-                pullPlaceholder: false,
+        var group = $("ul.photo-container").sortable({
+            group: 'photo-container',
+            itemSelector: 'li.photo-container-item',
+            containerSelector: 'ul',
+            vertical: false,
+            placeholder: '<div class="placeholder" />',
+            pullPlaceholder: false,
 
-                // set item relative to cursor position
-                onDragStart: function ($item, container, _super) {
-                    var offset = $item.offset(),
-                        pointer = container.rootGroup.pointer
+            // set item relative to cursor position
+            onDragStart: function ($item, container, _super) {
+                var offset = $item.offset(),
+                    pointer = container.rootGroup.pointer
 
-                    adjustment = {
-                        left: pointer.left - offset.left,
-                        top: pointer.top - offset.top
-                    }
-
-                    _super($item, container)
-                },
-                onDrop: function ($item, $container, _super) {
-                    console.log(group.sortable("serialize").get());
-                    $('#output').text(group.sortable("serialize").get().join("\n"))
-                    _super($item, $container)
-                    $item[0].style.backgroundImage = `url(${$item[0].dataset.url})`
-                },
-                onDrag: function ($item, position) {
-                    $item.css({
-                        width: 300,
-                        height: 300,
-                        left: position.left - adjustment.left,
-                        top: position.top - adjustment.top
-                    })
-                },
-                serialize: function (parent, children, isContainer) {
-                    return isContainer ? children.join() : parent.attr('rel')
+                adjustment = {
+                    left: pointer.left - offset.left,
+                    top: pointer.top - offset.top
                 }
-            })
-        });
+
+                _super($item, container)
+            },
+            onDrop: function ($item, $container, _super) {
+                console.log(group.sortable("serialize").get());
+                $('#output').text(group.sortable("serialize").get().join("\n"))
+                _super($item, $container)
+                $item[0].style.backgroundImage = `url(${$item[0].dataset.url})`
+            },
+            onDrag: function ($item, position) {
+                $item.css({
+                    width: 300,
+                    height: 300,
+                    left: position.left - adjustment.left,
+                    top: position.top - adjustment.top
+                })
+            },
+            serialize: function (parent, children, isContainer) {
+                return isContainer ? children.join() : parent.attr('rel')
+            }
+        })
     });
+
     function setCookie(cname, cvalue, exdays) {
         var d = new Date();
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
