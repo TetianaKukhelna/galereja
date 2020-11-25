@@ -6,9 +6,7 @@
     <script src="static/jquery-sortable.js"></script>
     <script src="static/bootstrap.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="dist/js/lightbox.js"></script>
 
-    <link rel="stylesheet" href="dist/css/lightbox.css">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" href="bootstrap.css">
     <link rel="stylesheet" href="main.css">
@@ -29,7 +27,7 @@
 </form>
 
 <section>
-    <div id="data"><div id="modalBody"></div></div>
+    <div id="data"></div>
 
     <!--        <ul class="photo-container" draggable="true">-->
     <!--            <li class="photo-container-item"-->
@@ -73,8 +71,25 @@
     <!--                 data-url="photo/photo10.jpg">-->
     <!--            </li>-->
     <!--        </ul>-->
-
+    <div id="photoGaleryModal" class="modal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+
 
 <footer class="footer">
     <a href="https://www.facebook.com/tetiana.kukhelna">Power by Tetiana </a>
@@ -146,59 +161,14 @@
 
                 })
 
-                // var modal = document.querySelector("#data");
-                // var trigger = document.querySelector("li.photo-container-item");
-                //
-                // // var closeButton = document.querySelector(".close-button");
-                //
-                // modal.onclick = function () {
-                //     trigger.style.display = "block";
-                // }
-                //
-                // window.onclick = function (event) {
-                //     if (event.target == trigger) {
-                //         trigger.style.display = "none";
-                //     }
-                // }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                // function toggleModal() {
-                //     modal.classList.toggle("show-modal");
-                // }
-                //
-                // function windowOnClick(event) {
-                //     if (event.target === modal) {
-                //         toggleModal();
-                //     }
-                // }
+                $(".photo-container-item").click(function () {
 
-                // console.log("triger ", trigger)
-                // trigger.addEventListener("click", toggleModal);
-                // console.log("triger ", trigger)
-                // // closeButton.addEventListener("click", toggleModal);
-                // window.addEventListener("click", windowOnClick);
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                function createModalWindow(event) {
-                    $('#modalBody').innerHTML = ''
-                    const is_valid = validateRequired()
-                    console.log(`Final valid verdict = ${is_valid}`)
-                    if (!is_valid) return false
-
-                    var modal = document.querySelector("#data");
-                    var trigger = document.querySelector(".photo-container-item");
-
-                    modal.onclick = function () {
-                        trigger.style.display = "block";
-                    }
-
-                    let myModal = new bootstrap.Modal(document.getElementById('data'), {
-                        keyboard: false
+                    var myModal = new bootstrap.Modal(document.getElementById('photoGaleryModal'), {
+                        keyboard: true
                     })
-                    myModal.show()
-                }
-
-                $(".photo-container-item").onclick = createModalWindow
 
 
+                });
             });
     });
 
