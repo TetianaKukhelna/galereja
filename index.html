@@ -140,27 +140,41 @@
                     serialize: function (parent, children, isContainer) {
                         return isContainer ? children.join() : parent.attr('rel')
                     }
+
                 })
+
+                var modal = document.querySelector("#data");
+                var trigger = document.querySelector("ul.photo-container");
+
+                // var closeButton = document.querySelector(".close-button");
+
+                modal.onclick = function () {
+                    trigger.style.display = "block";
+                }
+
+                window.onclick = function (event) {
+                    if (event.target == trigger) {
+                        trigger.style.display = "none";
+                    }
+                }
+
+                // function toggleModal() {
+                //     modal.classList.toggle("show-modal");
+                // }
+                //
+                // function windowOnClick(event) {
+                //     if (event.target === modal) {
+                //         toggleModal();
+                //     }
+                // }
+
+                // console.log("triger ", trigger)
+                // trigger.addEventListener("click", toggleModal);
+                // console.log("triger ", trigger)
+                // // closeButton.addEventListener("click", toggleModal);
+                // window.addEventListener("click", windowOnClick);
             });
     });
-
-    var modal = document.querySelector("#data");
-    var trigger = document.querySelector(".photo-container-item");
-    // var closeButton = document.querySelector(".close-button");
-
-    function toggleModal() {
-        modal.classList.toggle("show-modal");
-    }
-
-    function windowOnClick(event) {
-        if (event.target === modal) {
-            toggleModal();
-        }
-    }
-
-    trigger.addEventListener("click", toggleModal);
-    // closeButton.addEventListener("click", toggleModal);
-    window.addEventListener("click", windowOnClick);
 
 
     function setCookie(cname, cvalue, exdays) {
