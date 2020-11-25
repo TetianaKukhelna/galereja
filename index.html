@@ -161,17 +161,20 @@
 
                 })
 
-                $(".photo-container-item").click(function () {
-
-                    var myModal = new bootstrap.Modal(document.getElementById('photoGaleryModal'), {
-                        keyboard: true
+                $(".photo-container-item").click(function (e) {
+                    let modal = document.getElementById('photoGaleryModal')
+                    myModalEl.addEventListener('show.bs.modal', function (e) {
+                      // do something... BEFORE MODAL SHOW
                     })
+                    myModalEl.addEventListener('hidden.bs.modal', function (e) {
+                      // do something... BEFORE MODAL HIDE
+                    })
+                    var myModal = new bootstrap.Modal(modal, {keyboard: true})
                     myModal.show()
 
                 });
             });
     });
-
 
     function setCookie(cname, cvalue, exdays) {
         var d = new Date();
