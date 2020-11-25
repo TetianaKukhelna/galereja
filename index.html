@@ -6,7 +6,9 @@
     <script src="static/jquery-sortable.js"></script>
     <script src="static/bootstrap.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="dist/js/lightbox.js"></script>
 
+    <link rel="stylesheet" href="dist/css/lightbox.css">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" href="bootstrap.css">
     <link rel="stylesheet" href="main.css">
@@ -27,7 +29,8 @@
 </form>
 
 <section>
-    <div id="data"></div>
+    <div id="data"><div id="modalBody"></div></div>
+
     <!--        <ul class="photo-container" draggable="true">-->
     <!--            <li class="photo-container-item"-->
     <!--                 style="background: url(photo/photo1.jpg) no-repeat center center"-->
@@ -143,21 +146,21 @@
 
                 })
 
-                var modal = document.querySelector("#data");
-                var trigger = document.querySelector("li.photo-container-item");
-
-                // var closeButton = document.querySelector(".close-button");
-
-                modal.onclick = function () {
-                    trigger.style.display = "block";
-                }
-
-                window.onclick = function (event) {
-                    if (event.target == trigger) {
-                        trigger.style.display = "none";
-                    }
-                }
-
+                // var modal = document.querySelector("#data");
+                // var trigger = document.querySelector("li.photo-container-item");
+                //
+                // // var closeButton = document.querySelector(".close-button");
+                //
+                // modal.onclick = function () {
+                //     trigger.style.display = "block";
+                // }
+                //
+                // window.onclick = function (event) {
+                //     if (event.target == trigger) {
+                //         trigger.style.display = "none";
+                //     }
+                // }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 // function toggleModal() {
                 //     modal.classList.toggle("show-modal");
                 // }
@@ -173,6 +176,29 @@
                 // console.log("triger ", trigger)
                 // // closeButton.addEventListener("click", toggleModal);
                 // window.addEventListener("click", windowOnClick);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                function createModalWindow(event) {
+                    $('#modalBody').innerHTML = ''
+                    const is_valid = validateRequired()
+                    console.log(`Final valid verdict = ${is_valid}`)
+                    if (!is_valid) return false
+
+                    var modal = document.querySelector("#data");
+                    var trigger = document.querySelector(".photo-container-item");
+
+                    modal.onclick = function () {
+                        trigger.style.display = "block";
+                    }
+
+                    let myModal = new bootstrap.Modal(document.getElementById('data'), {
+                        keyboard: false
+                    })
+                    myModal.show()
+                }
+
+                $(".photo-container-item").onclick = createModalWindow
+
+
             });
     });
 
