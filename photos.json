@@ -45,6 +45,11 @@
         "src": "photo/new9.jpg",
         "title": "Názov fotky 2",
         "description": "Dlhší popis obrázku 2"
+      },
+      {
+        "src": "photo/new10.jpg",
+        "title": "Názov fotky 2",
+        "description": "Dlhší popis obrázku 2"
       }
     ]
 }
