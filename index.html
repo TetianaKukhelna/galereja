@@ -34,7 +34,7 @@
                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="carousel">
-<!--                    <div><img src="photo/photo1.jpg" class="modal-photo"></div>-->
+                    <!--                    <div><img src="photo/photo1.jpg" class="modal-photo"></div>-->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -58,6 +58,8 @@
 </body>
 
 <script>
+
+
     var PHOTO_JSON = null
 
     $(document).ready(function () {
@@ -74,14 +76,17 @@
                         data-description="${photoItem.description}">`
             });
 
-            const PHOTO_POSITIONS = getCookie("PHOTO_POSITIONS")
-            if (!PHOTO_POSITIONS){
-                var newLiArr = liArr
-            } else {
-                var newLiArr = PHOTO_POSITIONS.split(',').map(function (photoIndex, index, pJson) {
-                    return liArr[photoIndex]
+            function SortArr(list) {
+                const PHOTO_POSITIONS = getCookie("PHOTO_POSITIONS")
+                if (!PHOTO_POSITIONS) {
+                    return list
+                }
+                return PHOTO_POSITIONS.split(',').map(function (photoIndex, index, pJson) {
+                    return list[photoIndex]
                 })
             }
+
+            const newLiArr = SortArr(liArr)
 
             let joinLiString = newLiArr.join('')
             const ul = "<ul class=\"photo-container\" draggable=\"true\">" + joinLiString + "</ul>";
@@ -147,14 +152,7 @@
                 });
 
                 // PHOTO_POSITIONS = [3, 0, 2, 1]
-                const PHOTO_POSITIONS = getCookie("PHOTO_POSITIONS")
-                if (!PHOTO_POSITIONS){
-                    var NewImgModalArr = ImgModalArr
-                } else {
-                    var NewImgModalArr = PHOTO_POSITIONS.split(',').map(function (photoIndex, index, pJson) {
-                        return ImgModalArr[photoIndex]
-                    })
-                }
+                const NewImgModalArr = SortArr(ImgModalArr)
 
                 let joinImgModalString = NewImgModalArr.join('')
                 $divCarousel.append(joinImgModalString);
@@ -233,8 +231,8 @@
         }
     }
 
-    function getElementIndex (element) {
-      return [...element.parentNode.children].indexOf(element);
+    function getElementIndex(element) {
+        return [...element.parentNode.children].indexOf(element);
     }
 
 </script>
