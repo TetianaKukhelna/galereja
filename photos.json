@@ -2,22 +2,32 @@
     "photos":
     [
       {
-        "src": "photo/photo1.jpg",
+        "src": "photo/new1.jpg",
         "title": "Názov fotky 1",
         "description": "Dlhší popis obrázku 1"
       },
       {
-        "src": "photo/photo2.jpg",
+        "src": "photo/new2.jpg",
         "title": "Názov fotky 2",
         "description": "Dlhší popis obrázku 2"
       },
       {
-        "src": "photo/photo3.png",
+        "src": "photo/new3.jpg",
         "title": "Názov fotky 3",
         "description": "Dlhší popis obrázku 3"
       },
       {
-        "src": "photo/photo4.jpg",
+        "src": "photo/new4.jpg",
+        "title": "Názov fotky 2",
+        "description": "Dlhší popis obrázku 2"
+      },
+      {
+        "src": "photo/new6.jpg",
+        "title": "Názov fotky 2",
+        "description": "Dlhší popis obrázku 2"
+      },
+      {
+        "src": "photo/new7.jpg",
         "title": "Názov fotky 2",
         "description": "Dlhší popis obrázku 2"
       }
