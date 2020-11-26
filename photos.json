@@ -22,6 +22,11 @@
         "description": "Dlhší popis obrázku 2"
       },
       {
+        "src": "photo/new5.jpg",
+        "title": "Názov fotky 2",
+        "description": "Dlhší popis obrázku 2"
+      },
+      {
         "src": "photo/new6.jpg",
         "title": "Názov fotky 2",
         "description": "Dlhší popis obrázku 2"
@@ -30,7 +35,16 @@
         "src": "photo/new7.jpg",
         "title": "Názov fotky 2",
         "description": "Dlhší popis obrázku 2"
+      },
+      {
+        "src": "photo/new8.jpg",
+        "title": "Názov fotky 2",
+        "description": "Dlhší popis obrázku 2"
+      },
+      {
+        "src": "photo/new9.jpg",
+        "title": "Názov fotky 2",
+        "description": "Dlhší popis obrázku 2"
       }
-
     ]
 }
