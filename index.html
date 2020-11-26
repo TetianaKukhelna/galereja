@@ -33,13 +33,17 @@
                     <h5 class="modal-title">Modal title</h5>
                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div>
+                    <button type="button" class="btn btn-secondary carNav" data-action="slickPause">Stop</button>
+                    <button type="button" class="btn btn-primary carNav" data-action="slickPlay">Play</button>
+                </div>
                 <div class="carousel">
                     <!--                    <div><img src="photo/photo1.jpg" class="modal-photo"></div>-->
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+<!--                <div class="modal-footer">-->
+<!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
+<!--                </div>-->
             </div>
         </div>
     </div>
@@ -58,7 +62,9 @@
 </body>
 
 <script>
-
+    $(".carNav").click(function (e) {
+        $('.carousel').slick(e.currentTarget.dataset.action);
+    })
 
     var PHOTO_JSON = null
 
@@ -166,6 +172,8 @@
                         centerMode: true,
                         variableWidth: false,
                         autoplay: true,
+                        autoplaySpeed: 300,
+                        pauseOnHover:false
                     });
                 }
                 const index = getElementIndex(e.currentTarget)
