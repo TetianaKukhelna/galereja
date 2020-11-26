@@ -177,7 +177,7 @@
                             data-description="${photoItem.description}">`
                         });
                         let joinLiModalString = liModalArr.join('')
-                        const ulModal = "<ul class=\"photo-container\" draggable=\"true\">" + joinLiModalString + "</ul>";
+                        const ulModal = "<div class=\"carousel\" draggable=\"true\">" + joinLiModalString + "</div>";
                         $divModal.append(ulModal);
                         $('.carousel').slick({
                             dots: true,
