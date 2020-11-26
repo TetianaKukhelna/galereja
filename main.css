@@ -174,7 +174,10 @@ input::placeholder{
    = = = = = = = = = = = = = = = =  M o d a l  = = = = = = = = = = = = = = = = = =
    = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
-
+.modal-photo{
+    width:540px!important; /* you can use % */
+    height: auto;
+}
 
 .show-modal {
     opacity: 1;
@@ -224,18 +227,18 @@ div > li{
     width: 400px;
 }
 
-.slick-dots{
-    display: inline-flex;
-    justify-content: space-between;
-}
+/*.slick-dots{*/
+/*    display: inline-flex;*/
+/*    justify-content: space-between;*/
+/*}*/
 
-.slick-slide{
-  margin:10px;
-}
-.slick-slide img{
-  width:100%;
-  border: 2px solid #fff;
-}
+/*.slick-slide{*/
+/*  margin:10px;*/
+/*}*/
+/*.slick-slide img{*/
+/*  width:100%;*/
+/*  border: 2px solid #fff;*/
+/*}*/
 
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
    = = = = = = = = = = = = = = = =  H e l p e r s  = = = = = = = = = = = = = = = = = =
