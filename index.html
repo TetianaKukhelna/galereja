@@ -72,8 +72,11 @@
                     <h5 class="modal-title">Modal title</h5>
                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <p>Modal body text goes here.</p>
+                <div class="carousel">
+                    <div><img src="photo/photo1.jpg"></div>
+                    <div><img src="photo/photo2.jpg"></div>
+                    <div><img src="photo/photo3.png"></div>
+                    <div><img src="photo/photo4.jpg"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -163,11 +166,31 @@
 
                 $(".photo-container-item").click(function (e) {
                     let modal = document.getElementById('photoGaleryModal')
-                    myModalEl.addEventListener('show.bs.modal', function (e) {
-                      // do something... BEFORE MODAL SHOW
+                    modal.addEventListener('show.bs.modal', function (e) {
+
+                        var $divModal = $(".modal-body");
+                        let liModalArr = photoJson.photos.map(function (photoItem, index, pJson) {
+                            return `<li class="photo-container-item"
+                            style="background: url(${photoItem.src}) no-repeat center center"
+                            data-url="${photoItem.src}"
+                            data-title="${photoItem.title}"
+                            data-description="${photoItem.description}">`
+                        });
+                        let joinLiModalString = liModalArr.join('')
+                        const ulModal = "<ul class=\"photo-container\" draggable=\"true\">" + joinLiModalString + "</ul>";
+                        $divModal.append(ulModal);
+                        $('.carousel').slick({
+                            dots: true,
+                            infinite: true,
+                            speed: 300,
+                            slidesToShow: 1,
+                            adaptiveHeight: true,
+                            slidesToScroll: 1,
+                            centerMode: true
+                        });
                     })
-                    myModalEl.addEventListener('hidden.bs.modal', function (e) {
-                      // do something... BEFORE MODAL HIDE
+                    modal.addEventListener('hidden.bs.modal', function (e) {
+
                     })
                     var myModal = new bootstrap.Modal(modal, {keyboard: true})
                     myModal.show()

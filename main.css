@@ -214,8 +214,28 @@ input::placeholder{
     background: #ffffff;
 }
 
+ul > button{
+    height: 50px;
+    width: 100px;
+}
 
+div > li{
+    height: 400px;
+    width: 400px;
+}
 
+.slick-dots{
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.slick-slide{
+  margin:10px;
+}
+.slick-slide img{
+  width:100%;
+  border: 2px solid #fff;
+}
 
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
    = = = = = = = = = = = = = = = =  H e l p e r s  = = = = = = = = = = = = = = = = = =
