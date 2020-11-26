@@ -73,10 +73,10 @@
                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="carousel">
-                    <div><img src="photo/photo1.jpg" class="modal-photo"></div>
-                    <div><img src="photo/photo2.jpg" class="modal-photo"></div>
-                    <div><img src="photo/photo3.png" class="modal-photo"></div>
-                    <div><img src="photo/photo4.jpg" class="modal-photo"></div>
+<!--                    <div><img src="photo/photo1.jpg" class="modal-photo"></div>-->
+<!--                    <div><img src="photo/photo2.jpg" class="modal-photo"></div>-->
+<!--                    <div><img src="photo/photo3.png" class="modal-photo"></div>-->
+<!--                    <div><img src="photo/photo4.jpg" class="modal-photo"></div>-->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -96,7 +96,7 @@
 <script src="static/plotly-latest.min.js"></script>
 <script src="static/jquery-sortable.js"></script>
 <script src="static/bootstrap.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript" src="static/slick.min.js"></script>
 </body>
 
 <script>
@@ -166,19 +166,17 @@
 
                 $(".photo-container-item").click(function (e) {
                     let modal = document.getElementById('photoGaleryModal')
-                    modal.addEventListener('show.bs.modal', function (e) {
 
-                        var $divModal = $(".modal-body");
-                        let liModalArr = photoJson.photos.map(function (photoItem, index, pJson) {
-                            return `<img class ="modal-photo"
-                            style="background: url(${photoItem.src}) no-repeat center center"
-                            data-url="${photoItem.src}"
-                            data-title="${photoItem.title}"
-                            data-description="${photoItem.description}">`
+                    modal.addEventListener('show.bs.modal', function (e) {
+                        var $divCarousel = $(".carousel");
+                        let ImgModalArr = photoJson.photos.map(function (photoItem, index, pJson) {
+                            return `<div><img class ="modal-photo" src=${photoItem.src}
+                                data-url="${photoItem.src}"
+                                data-title="${photoItem.title}"
+                                data-description="${photoItem.description}"></div>`
                         });
-                        let joinLiModalString = liModalArr.join('')
-                        const ulModal = "<div class=\"carousel\" draggable=\"true\">" + joinLiModalString + "</div>";
-                        $divModal.append(ulModal);
+                        let joinImgModalString = ImgModalArr.join('')
+                        $divCarousel.append(joinImgModalString);
                         $('.carousel').slick({
                             dots: true,
                             infinite: true,
