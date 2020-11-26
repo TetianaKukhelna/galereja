@@ -76,18 +76,7 @@
                         data-description="${photoItem.description}">`
             });
 
-            function SortArr(list) {
-                const PHOTO_POSITIONS = getCookie("PHOTO_POSITIONS")
-                if (!PHOTO_POSITIONS) {
-                    return list
-                }
-                return PHOTO_POSITIONS.split(',').map(function (photoIndex, index, pJson) {
-                    return list[photoIndex]
-                })
-            }
-
             const newLiArr = SortArr(liArr)
-
             let joinLiString = newLiArr.join('')
             const ul = "<ul class=\"photo-container\" draggable=\"true\">" + joinLiString + "</ul>";
             $divContainer.append(ul);
@@ -144,7 +133,13 @@
                 if (PHOTO_JSON === null) return
 
                 var $divCarousel = $(".carousel");
+
+                const filterText = $('#place_search')[0].value
+                var urlList = getFilterPhotoUrl(filterText)
+
                 let ImgModalArr = PHOTO_JSON.photos.map(function (photoItem, index, pJson) {
+                    if ( !urlList.includes(photoItem.src) ) return
+
                     return `<div><img class ="modal-photo" src=${photoItem.src}
                         data-url="${photoItem.src}"
                         data-title="${photoItem.title}"
@@ -166,10 +161,11 @@
                         dots: true,
                         infinite: true,
                         speed: 300,
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
                         centerMode: true,
-                        variableWidth: true
+                        variableWidth: false,
+                        autoplay: true,
                     });
                 }
                 const index = getElementIndex(e.currentTarget)
@@ -193,10 +189,43 @@
         })
 
         $('#place_search').keyup(function (e) {
-            console.log( t )
+            let filterText = e.currentTarget.value.toLowerCase()
+            const urlsList = getFilterPhotoUrl(filterText)
+
+            $('li.photo-container-item').map(function (e) {
+                if ( urlsList.includes(this.dataset.url) ){
+                    $( this ).show()
+                } else {
+                    $( this ).hide()
+                }
+            })
         })
 
     });
+
+    function getFilterPhotoUrl(filterText){
+        return PHOTO_JSON.photos.map(function (photoItem, index, pJson) {
+            const isTitle = photoItem.title.toLowerCase().includes(filterText)
+            if( isTitle )
+                return photoItem.src
+
+            const isDesc =  photoItem.description.toLowerCase().includes(filterText)
+            if ( isDesc )
+                return photoItem.src
+        })
+    }
+
+
+    function SortArr(list) {
+        const PHOTO_POSITIONS = getCookie("PHOTO_POSITIONS")
+        if (!PHOTO_POSITIONS) {
+            return list
+        }
+        return PHOTO_POSITIONS.split(',').map(function (photoIndex, index, pJson) {
+            return list[photoIndex]
+        })
+    }
+
 
     function clearCookie() {
         return setCookie('PHOTO_POSITIONS', '')
