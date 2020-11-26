@@ -7,8 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Galeria</title>
-
-
 </head>
 <body>
 <header>
@@ -22,47 +20,10 @@
 
 <section>
     <div id="data"></div>
-
     <!--        <ul class="photo-container" draggable="true">-->
     <!--            <li class="photo-container-item"-->
     <!--                 style="background: url(photo/photo1.jpg) no-repeat center center"-->
     <!--                 data-url="photo/photo1.jpg">-->
-    <!--            </li>-->
-    <!--            <li class="photo-container-item"-->
-    <!--                 style="background: url(photo/photo2.jpg) no-repeat center center"-->
-    <!--                 data-url="photo/photo2.jpg">-->
-    <!--            </li>-->
-    <!--            <li class="photo-container-item"-->
-    <!--                 style="background: url(photo/photo3.png) no-repeat center center"-->
-    <!--                 data-url="photo/photo3.jpg">-->
-    <!--            </li>-->
-    <!--            <li class="photo-container-item"-->
-    <!--                 style="background: url(photo/photo4.jpg) no-repeat center center"-->
-    <!--                 data-url="photo/photo4.jpg">-->
-    <!--            </li>-->
-    <!--            <li class="photo-container-item"-->
-    <!--                 style="background: url(photo/photo5.jpg) no-repeat center center"-->
-    <!--                 data-url="photo/photo5.jpg">-->
-    <!--            </li>-->
-    <!--            <li class="photo-container-item"-->
-    <!--                 style="background: url(photo/photo6.jpg) no-repeat center center"-->
-    <!--                 data-url="photo/photo6.jpg">-->
-    <!--            </li>-->
-    <!--            <li class="photo-container-item"-->
-    <!--                 style="background: url(photo/photo7.jpg) no-repeat center center"-->
-    <!--                 data-url="photo/photo7.jpg">-->
-    <!--            </li>-->
-    <!--            <li class="photo-container-item"-->
-    <!--                 style="background: url(photo/photo8.jpg) no-repeat center center"-->
-    <!--                 data-url="photo/photo8.jpg">-->
-    <!--            </li>-->
-    <!--            <li class="photo-container-item"-->
-    <!--                 style="background: url(photo/photo9.jpg) no-repeat center center"-->
-    <!--                 data-url="photo/photo9.jpg">-->
-    <!--            </li>-->
-    <!--            <li class="photo-container-item"-->
-    <!--                 style="background: url(photo/photo10.jpg) no-repeat center center"-->
-    <!--                 data-url="photo/photo10.jpg">-->
     <!--            </li>-->
     <!--        </ul>-->
     <div id="photoGaleryModal" class="modal" tabindex="-1">
@@ -74,9 +35,6 @@
                 </div>
                 <div class="carousel">
 <!--                    <div><img src="photo/photo1.jpg" class="modal-photo"></div>-->
-<!--                    <div><img src="photo/photo2.jpg" class="modal-photo"></div>-->
-<!--                    <div><img src="photo/photo3.png" class="modal-photo"></div>-->
-<!--                    <div><img src="photo/photo4.jpg" class="modal-photo"></div>-->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -178,8 +136,6 @@
                 console.log('INIT MODAL')
                 var myModal = new bootstrap.Modal(modal, {keyboard: true})
                 myModal.show()
-                //  EXPERIMENT
-                //
                 if (PHOTO_JSON === null) return
 
                 var $divCarousel = $(".carousel");
@@ -208,7 +164,7 @@
                     var $slick = $('.carousel').slick('reinit');
                 } else {
                     console.log('FIRST INIT SLICK')
-                    var $slick = $('.carousel').slick({
+                    $('.carousel').slick({
                         dots: true,
                         infinite: true,
                         speed: 300,
@@ -237,9 +193,6 @@
             console.log(' = = == = = == = = = = == ')
             console.log(' = = == = = == = = = = == ')
         })
-
-
-
     });
 
     function clearCookie() {
@@ -285,5 +238,4 @@
     }
 
 </script>
-
 </html>
