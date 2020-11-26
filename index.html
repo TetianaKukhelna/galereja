@@ -115,7 +115,17 @@
                         data-title="${photoItem.title}"
                         data-description="${photoItem.description}">`
             });
-            let joinLiString = liArr.join('')
+
+            const PHOTO_POSITIONS = getCookie("PHOTO_POSITIONS")
+            if (!PHOTO_POSITIONS){
+                var newLiArr = liArr
+            } else {
+                var newLiArr = PHOTO_POSITIONS.split(',').map(function (photoIndex, index, pJson) {
+                    return liArr[photoIndex]
+                })
+            }
+
+            let joinLiString = newLiArr.join('')
             const ul = "<ul class=\"photo-container\" draggable=\"true\">" + joinLiString + "</ul>";
             $divContainer.append(ul);
 
