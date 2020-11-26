@@ -100,7 +100,6 @@
 </body>
 
 <script>
-    var PHOTO_POSITIONS = null;
     var PHOTO_JSON = null
 
     $(document).ready(function () {
@@ -144,8 +143,8 @@
                     _super($item, container)
                 },
                 onDrop: function ($item, $container, _super) {
-                    PHOTO_POSITIONS = group.sortable("serialize").get()[0].split(',')
-                    console.log(PHOTO_POSITIONS);
+                    pos_string = group.sortable("serialize").get()[0]
+                    setCookie("PHOTO_POSITIONS", pos_string)
                     $('#output').text(group.sortable("serialize").get().join("\n"))
                     _super($item, $container)
                     $item[0].style.backgroundImage = `url(${$item[0].dataset.url})`
@@ -182,10 +181,11 @@
                 });
 
                 // PHOTO_POSITIONS = [3, 0, 2, 1]
+                const PHOTO_POSITIONS = getCookie("PHOTO_POSITIONS")
                 if (!PHOTO_POSITIONS){
                     var NewImgModalArr = ImgModalArr
                 } else {
-                    var NewImgModalArr = PHOTO_POSITIONS.map(function (photoIndex, index, pJson) {
+                    var NewImgModalArr = PHOTO_POSITIONS.split(',').map(function (photoIndex, index, pJson) {
                         return ImgModalArr[photoIndex]
                     })
                 }
@@ -216,46 +216,6 @@
 
         let modal = document.getElementById('photoGaleryModal')
         modal.addEventListener('show.bs.modal', function (e) {
-            // if (PHOTO_JSON === null) return
-            //
-            // var $divCarousel = $(".carousel");
-            // let ImgModalArr = PHOTO_JSON.photos.map(function (photoItem, index, pJson) {
-            //     return `<div><img class ="modal-photo" src=${photoItem.src}
-            //         data-url="${photoItem.src}"
-            //         data-title="${photoItem.title}"
-            //         data-description="${photoItem.description}"></div>`
-            // });
-            //
-            // // PHOTO_POSITIONS = [3, 0, 2, 1]
-            // if (!PHOTO_POSITIONS){
-            //     var NewImgModalArr = ImgModalArr
-            // } else {
-            //     var NewImgModalArr = PHOTO_POSITIONS.map(function (photoIndex, index, pJson) {
-            //         return ImgModalArr[photoIndex]
-            //     })
-            // }
-            //
-            // console.log( NewImgModalArr )
-            // let joinImgModalString = NewImgModalArr.join('')
-            // $divCarousel.append(joinImgModalString);
-            //
-            // if ($('.carousel').hasClass('slick-initialized')) {
-            //     console.log('REINIT SLICK')
-            //     $('.carousel').slick('reinit');
-            // } else {
-            //     console.log('FIRST INIT SLICK')
-            //     $('.carousel').slick({
-            //         dots: true,
-            //         infinite: true,
-            //         speed: 300,
-            //         slidesToShow: 2,
-            //         centerMode: true,
-            //         variableWidth: true
-            //     });
-            // }
-            // setTimeout(function (){
-            //
-            // }, 300)
         })
         modal.addEventListener('hidden.bs.modal', function (e) {
             $('.carousel').slick('unslick');
@@ -270,6 +230,10 @@
 
 
     });
+
+    function clearCookie() {
+        return setCookie('PHOTO_POSITIONS', '')
+    }
 
     function setCookie(cname, cvalue, exdays = 10) {
         var d = new Date();
