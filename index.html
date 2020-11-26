@@ -100,100 +100,175 @@
 </body>
 
 <script>
-
+    var PHOTO_POSITIONS = null;
+    var PHOTO_JSON = null
 
     $(document).ready(function () {
         const url = "photos.json";
-        fetch(url)
-            .then(response => response.json())
-            .then(function (photoJson) {
+        fetch(url).then(response => response.json()).then(function (photoJson) {
+            PHOTO_JSON = photoJson
+            var $divContainer = $("#data");
 
-                var $divContainer = $("#data");
-
-                let liArr = photoJson.photos.map(function (photoItem, index, pJson) {
-                    return `<li class="photo-container-item"
-                            style="background: url(${photoItem.src}) no-repeat center center"
-                            data-url="${photoItem.src}"
-                            data-title="${photoItem.title}"
-                            data-description="${photoItem.description}">`
-                });
-                let joinLiString = liArr.join('')
-                const ul = "<ul class=\"photo-container\" draggable=\"true\">" + joinLiString + "</ul>";
-                $divContainer.append(ul);
+            let liArr = photoJson.photos.map(function (photoItem, index, pJson) {
+                return `<li rel=${index} class="photo-container-item"
+                        style="background: url(${photoItem.src}) no-repeat center center"
+                        data-url="${photoItem.src}"
+                        data-title="${photoItem.title}"
+                        data-description="${photoItem.description}">`
+            });
+            let joinLiString = liArr.join('')
+            const ul = "<ul class=\"photo-container\" draggable=\"true\">" + joinLiString + "</ul>";
+            $divContainer.append(ul);
 
 
-                var adjustment
+            var adjustment
 
-                var group = $("ul.photo-container").sortable({
-                    group: 'photo-container',
-                    itemSelector: 'li.photo-container-item',
-                    containerSelector: 'ul',
-                    vertical: false,
-                    placeholder: '<div class="placeholder" />',
-                    pullPlaceholder: false,
+            var group = $("ul.photo-container").sortable({
+                group: 'photo-container',
+                itemSelector: 'li.photo-container-item',
+                containerSelector: 'ul',
+                vertical: false,
+                placeholder: '<div class="placeholder" />',
+                pullPlaceholder: false,
 
-                    // set item relative to cursor position
-                    onDragStart: function ($item, container, _super) {
-                        var offset = $item.offset(),
-                            pointer = container.rootGroup.pointer
+                // set item relative to cursor position
+                onDragStart: function ($item, container, _super) {
+                    var offset = $item.offset(),
+                        pointer = container.rootGroup.pointer
 
-                        adjustment = {
-                            left: pointer.left - offset.left,
-                            top: pointer.top - offset.top
-                        }
-
-                        _super($item, container)
-                    },
-                    onDrop: function ($item, $container, _super) {
-                        console.log(group.sortable("serialize").get());
-                        $('#output').text(group.sortable("serialize").get().join("\n"))
-                        _super($item, $container)
-                        $item[0].style.backgroundImage = `url(${$item[0].dataset.url})`
-                    },
-                    onDrag: function ($item, position) {
-                        $item.css({
-                            width: 300,
-                            height: 300,
-                            left: position.left - adjustment.left,
-                            top: position.top - adjustment.top
-                        })
-                    },
-                    serialize: function (parent, children, isContainer) {
-                        return isContainer ? children.join() : parent.attr('rel')
+                    adjustment = {
+                        left: pointer.left - offset.left,
+                        top: pointer.top - offset.top
                     }
 
-                })
-
-                $(".photo-container-item").click(function (e) {
-                    let modal = document.getElementById('photoGaleryModal')
-
-                    modal.addEventListener('show.bs.modal', function (e) {
-                        var $divCarousel = $(".carousel");
-                        let ImgModalArr = photoJson.photos.map(function (photoItem, index, pJson) {
-                            return `<div><img class ="modal-photo" src=${photoItem.src}
-                                data-url="${photoItem.src}"
-                                data-title="${photoItem.title}"
-                                data-description="${photoItem.description}"></div>`
-                        });
-                        let joinImgModalString = ImgModalArr.join('')
-                        $divCarousel.append(joinImgModalString);
-                        $('.carousel').slick({
-                            dots: true,
-                            infinite: true,
-                            speed: 300,
-                            slidesToShow: 2,
-                            centerMode: true,
-                            variableWidth: true
-                        });
+                    _super($item, container)
+                },
+                onDrop: function ($item, $container, _super) {
+                    PHOTO_POSITIONS = group.sortable("serialize").get()[0].split(',')
+                    console.log(PHOTO_POSITIONS);
+                    $('#output').text(group.sortable("serialize").get().join("\n"))
+                    _super($item, $container)
+                    $item[0].style.backgroundImage = `url(${$item[0].dataset.url})`
+                },
+                onDrag: function ($item, position) {
+                    $item.css({
+                        width: 300,
+                        height: 300,
+                        left: position.left - adjustment.left,
+                        top: position.top - adjustment.top
                     })
-                    modal.addEventListener('hidden.bs.modal', function (e) {
+                },
+                serialize: function (parent, children, isContainer) {
+                    return isContainer ? children.join() : parent.attr('rel')
+                }
 
-                    })
-                    var myModal = new bootstrap.Modal(modal, {keyboard: true})
-                    myModal.show()
+            })
 
+
+            $(".photo-container-item").click(function (e) {
+                console.log('INIT MODAL')
+                var myModal = new bootstrap.Modal(modal, {keyboard: true})
+                myModal.show()
+                //  EXPERIMENT
+                //
+                if (PHOTO_JSON === null) return
+
+                var $divCarousel = $(".carousel");
+                let ImgModalArr = PHOTO_JSON.photos.map(function (photoItem, index, pJson) {
+                    return `<div><img class ="modal-photo" src=${photoItem.src}
+                        data-url="${photoItem.src}"
+                        data-title="${photoItem.title}"
+                        data-description="${photoItem.description}"></div>`
                 });
+
+                // PHOTO_POSITIONS = [3, 0, 2, 1]
+                if (!PHOTO_POSITIONS){
+                    var NewImgModalArr = ImgModalArr
+                } else {
+                    var NewImgModalArr = PHOTO_POSITIONS.map(function (photoIndex, index, pJson) {
+                        return ImgModalArr[photoIndex]
+                    })
+                }
+
+                let joinImgModalString = NewImgModalArr.join('')
+                $divCarousel.append(joinImgModalString);
+
+                if ($('.carousel').hasClass('slick-initialized')) {
+                    console.log('REINIT SLICK')
+                    var $slick = $('.carousel').slick('reinit');
+                } else {
+                    console.log('FIRST INIT SLICK')
+                    var $slick = $('.carousel').slick({
+                        dots: true,
+                        infinite: true,
+                        speed: 300,
+                        slidesToShow: 2,
+                        centerMode: true,
+                        variableWidth: true
+                    });
+                }
+                const index = getElementIndex(e.currentTarget)
+                console.log("GO TO " + index)
+                $('.carousel').slick('slickGoTo', index)
             });
+
+        });
+
+        let modal = document.getElementById('photoGaleryModal')
+        modal.addEventListener('show.bs.modal', function (e) {
+            // if (PHOTO_JSON === null) return
+            //
+            // var $divCarousel = $(".carousel");
+            // let ImgModalArr = PHOTO_JSON.photos.map(function (photoItem, index, pJson) {
+            //     return `<div><img class ="modal-photo" src=${photoItem.src}
+            //         data-url="${photoItem.src}"
+            //         data-title="${photoItem.title}"
+            //         data-description="${photoItem.description}"></div>`
+            // });
+            //
+            // // PHOTO_POSITIONS = [3, 0, 2, 1]
+            // if (!PHOTO_POSITIONS){
+            //     var NewImgModalArr = ImgModalArr
+            // } else {
+            //     var NewImgModalArr = PHOTO_POSITIONS.map(function (photoIndex, index, pJson) {
+            //         return ImgModalArr[photoIndex]
+            //     })
+            // }
+            //
+            // console.log( NewImgModalArr )
+            // let joinImgModalString = NewImgModalArr.join('')
+            // $divCarousel.append(joinImgModalString);
+            //
+            // if ($('.carousel').hasClass('slick-initialized')) {
+            //     console.log('REINIT SLICK')
+            //     $('.carousel').slick('reinit');
+            // } else {
+            //     console.log('FIRST INIT SLICK')
+            //     $('.carousel').slick({
+            //         dots: true,
+            //         infinite: true,
+            //         speed: 300,
+            //         slidesToShow: 2,
+            //         centerMode: true,
+            //         variableWidth: true
+            //     });
+            // }
+            // setTimeout(function (){
+            //
+            // }, 300)
+        })
+        modal.addEventListener('hidden.bs.modal', function (e) {
+            $('.carousel').slick('unslick');
+            console.log('UNSLICK')
+            $('.carousel').html('')
+            console.log(' = = == = = == = = = = == ')
+            console.log(' = = == = = == = = = = == ')
+            console.log(' = = == = = == = = = = == ')
+            console.log(' = = == = = == = = = = == ')
+        })
+
+
+
     });
 
     function setCookie(cname, cvalue, exdays) {
@@ -228,6 +303,10 @@
                 setCookie("username", user, 365);
             }
         }
+    }
+
+    function getElementIndex (element) {
+      return [...element.parentNode.children].indexOf(element);
     }
 
 </script>
